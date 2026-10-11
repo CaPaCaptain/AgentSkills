@@ -32,3 +32,7 @@ $skill-installer install https://github.com/CaPaCaptain/AgentSkills/tree/main/pl
 AgentGIS skills drive a local server and a visible browser on **your own computer**. They do not work in cloud sandboxes or web chat apps. See each plugin's README for host-specific notes, privacy and terms.
 
 Contact: contact@7m7s.tech
+
+## License
+
+[CC BY-ND 4.0](LICENSE): you may redistribute the skills unchanged with attribution; modified versions may not be distributed.
