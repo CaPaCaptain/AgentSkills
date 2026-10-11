@@ -1,4 +1,4 @@
 interface:
   display_name: "AgentGIS · English bootstrap"
-  short_description: "Verify pinned official guidance and start verified local GIS control"
+  short_description: "Start the official local server and read the current official guide after sign-in"
   default_prompt: "Use $agentgis-bootstrap-en to fetch official guidance, verify local communication and analyze my planning data."

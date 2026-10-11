@@ -1,4 +1,4 @@
-# AgentGIS skills (bootstrap 1.3.1)
+# AgentGIS skills (bootstrap 2.0.0)
 
 Conversational planning GIS: the agent starts the official AgentGIS local server, opens the workspace at https://agent-gis.7m7s.tech/app, and after you sign in performs imports, CRS checks, TOD / coverage-gap / site-selection analysis and PDF/PNG/GeoJSON exports. GIS data stays in your browser by default.
 
@@ -7,7 +7,7 @@ Conversational planning GIS: the agent starts the official AgentGIS local server
 | `skills/agentgis-bootstrap` | 简体中文 |
 | `skills/agentgis-bootstrap-en` | English |
 
-Each folder is complete: `SKILL.md`, `agents/openai.yaml` and `references/PINNED-RELEASE.json` (SHA-256 pins for the local helper, the full guide and the manuals; the full guide is read only after you sign in).
+Each folder is complete: `SKILL.md` and `agents/openai.yaml`. The bootstrap pins no release: it reads the official directory `/skills/manifest.json`, verifies the Local Helper against `/helpers/manifest.json`, and after you sign in reads the current full guide from the protected catalog `/skills/catalog.json`. The same folders work in every host and rarely need updating.
 
 ## Install
 
@@ -18,7 +18,7 @@ Codex: `$skill-installer install https://github.com/CaPaCaptain/AgentSkills/tree
 ## Requirements and limits
 
 - Runs on your own computer: Node.js (^22.12, ^24 or >=26) and a visible browser. Cloud sandboxes and web chat apps cannot run the local server.
-- Claude Code: use your own Chrome (for example Claude in Chrome); the desktop app's built-in browser cannot reach 127.0.0.1 from an HTTPS page.
+- No browser extension needed: the agent opens /app in the host's visible browser if it can reach 127.0.0.1, otherwise in your system default browser.
 - A free AgentGIS account. Demo/Beta: accepted end-to-end on WorkBuddy for macOS; Claude Code and Codex are being validated.
 - Results are planning-grade, not survey, legal or engineering accuracy.
 

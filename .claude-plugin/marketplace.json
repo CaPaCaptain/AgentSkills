@@ -9,7 +9,7 @@
     {
       "name": "agentgis",
       "source": "./plugins/agentgis",
-      "description": "AgentGIS: planning GIS by conversation in the visible AgentGIS workspace (local Claude Code; needs Node.js, your own Chrome and an AgentGIS sign-in)."
+      "description": "AgentGIS: planning GIS by conversation in the visible AgentGIS workspace (runs on your own computer; needs Node.js, a visible browser and an AgentGIS sign-in)."
     }
   ]
 }
