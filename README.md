@@ -1,6 +1,6 @@
 # AgentSkills
 
-Public agent skills published by **7m7s (深圳市七分七秒智能科技有限公司)**. This repository is the single public distribution point for 7m7s skills: Claude Code installs them through the plugin marketplace in this repo, Codex installs the skill folders directly. Each skill's source of truth lives in its own project repository and is exported here; do not edit the copies in this repo by hand.
+Public agent skills published by **7m7**. This repository is the single public distribution point for 7m7s skills: Claude Code installs them through the plugin marketplace in this repo, Codex installs the skill folders directly. Each skill's source of truth lives in its own project repository and is exported here; do not edit the copies in this repo by hand.
 
 ## Skills
 
