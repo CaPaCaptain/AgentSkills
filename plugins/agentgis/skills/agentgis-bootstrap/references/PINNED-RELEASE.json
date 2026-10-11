@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "origin": "https://agent-gis.7m7s.tech",
+  "bootstrap_version": "1.3.1",
+  "language": "zh-CN",
+  "skill_release": {
+    "version": "0.6.13",
+    "application_version": "0.8.0",
+    "bridge_protocol": 4,
+    "entry": "/skills/releases/0.6.13/zh-CN/SKILL.md",
+    "files": [
+      {
+        "path": "SKILL.md",
+        "url": "/skills/releases/0.6.13/zh-CN/SKILL.md",
+        "sha256": "db9b59ed4d57368bf3f463e0363f8bc7d4381654dd9595cd426ed609f4b09e97",
+        "bytes": 12350
+      },
+      {
+        "path": "agents/openai.yaml",
+        "url": "/skills/releases/0.6.13/zh-CN/agents/openai.yaml",
+        "sha256": "25355d9ac4302a0b3fb7d65bde4cae4f652871991e4708ff696687d33c511d50",
+        "bytes": 268
+      },
+      {
+        "path": "references/LOCAL-SESSION.md",
+        "url": "/skills/releases/0.6.13/zh-CN/references/LOCAL-SESSION.md",
+        "sha256": "f778de094463f899ccdd95547dff3d9bf36ec56647cff6a69bd5c797b2a2f20c",
+        "bytes": 7131
+      },
+      {
+        "path": "references/WORKFLOWS.md",
+        "url": "/skills/releases/0.6.13/zh-CN/references/WORKFLOWS.md",
+        "sha256": "d60011401ec40f20c3311832124aa8349f27b5692a7da8fc640bb1ecf7e9d11a",
+        "bytes": 3951
+      },
+      {
+        "path": "references/CAPABILITIES.md",
+        "url": "/skills/releases/0.6.13/zh-CN/references/CAPABILITIES.md",
+        "sha256": "2bae3bdd64144e2b70671b2dc45a81352bb571d2be948a8dc0a259781dc0cb7c",
+        "bytes": 6540
+      }
+    ]
+  },
+  "documentation": {
+    "version": "1.0.10",
+    "index": "/docs/agent/releases/1.0.10/index.json",
+    "sha256": "a916e911717508d29e53378ef2e652657be55e023ae0051f4c2fb8061a2e4cfe",
+    "bytes": 18006
+  },
+  "protected_content": {
+    "requires": "signed-in AgentGIS session (paired page) or MCP OAuth bearer",
+    "local_capability": "agent.docs_get",
+    "remote_endpoint": "/api/agent/docs?path=<logical path>"
+  },
+  "helper": {
+    "version": "0.1.0",
+    "node_engine": "^22.12.0 || ^24.0.0 || >=26.0.0",
+    "manifest": "/helpers/releases/0.1.0/manifest.json",
+    "files": [
+      {
+        "path": "agentgis-helper.mjs",
+        "url": "/helpers/releases/0.1.0/agentgis-helper.mjs",
+        "sha256": "c085608a780b8fe395d955ce811d2e7817de903e36deaeecf8ce0b73b856da43",
+        "bytes": 2069276
+      },
+      {
+        "path": "THIRD-PARTY-NOTICES.txt",
+        "url": "/helpers/releases/0.1.0/THIRD-PARTY-NOTICES.txt",
+        "sha256": "46d9efec1d74847b5b7d3a173be9110bda8d80e3ad5e6746da9d4e4d0bb1f487",
+        "bytes": 129867
+      }
+    ]
+  }
+}

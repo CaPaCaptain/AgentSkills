@@ -1,0 +1,15 @@
+{
+  "name": "agentskills",
+  "description": "Public agent skills published by 7m7s (CaPaCaptain).",
+  "owner": {
+    "name": "7m7s (CaPaCaptain)",
+    "email": "contact@7m7s.tech"
+  },
+  "plugins": [
+    {
+      "name": "agentgis",
+      "source": "./plugins/agentgis",
+      "description": "AgentGIS: planning GIS by conversation in the visible AgentGIS workspace (local Claude Code; needs Node.js, your own Chrome and an AgentGIS sign-in)."
+    }
+  ]
+}

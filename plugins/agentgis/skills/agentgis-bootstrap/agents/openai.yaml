@@ -1,0 +1,4 @@
+interface:
+  display_name: "AgentGIS · 中文引导"
+  short_description: "按固定版本校验官方中文指导，启动本地通信并完成规划 GIS 工作"
+  default_prompt: "使用 $agentgis-bootstrap 获取官方指导，检查本地通信并分析我的规划数据。"
