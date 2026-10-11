@@ -1,4 +1,4 @@
-# AgentGIS skills (bootstrap 2.1.0)
+# AgentGIS skills (plugin 2.1.1, bootstrap 2.1.0)
 
 Conversational planning GIS: the agent starts the official AgentGIS local server, opens the workspace at https://agent-gis.7m7s.tech/app, and after you sign in performs imports, CRS checks, TOD / coverage-gap / site-selection analysis and PDF/PNG/GeoJSON exports. GIS data stays in your browser by default.
 
@@ -24,7 +24,7 @@ Codex: `$skill-installer install https://github.com/CaPaCaptain/AgentSkills/tree
 
 ## Data and network access
 
-The plugin declares one local MCP server, `agentgis`: the official AgentGIS Local Helper 0.2.0 shipped in `helper/` (Node.js, listens on 127.0.0.1 only after `agentgis_start`). The plugin downloads and runs no other program. Its skills and server contact only these services:
+The plugin declares one local MCP server, `agentgis`: the official AgentGIS Local Helper 0.3.0 shipped in `helper/` (Node.js, listens on 127.0.0.1 only after `agentgis_start`). The plugin downloads and runs no other program. Its skills and server contact only these services:
 
 | Service | What is sent or received | When |
 | --- | --- | --- |
