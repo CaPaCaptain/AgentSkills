@@ -1,9 +1,10 @@
 ---
 name: agentgis-bootstrap-en
 display_name: AgentGIS
+display_name_en: AgentGIS
 description: "Use the visible AgentGIS workspace (https://agent-gis.7m7s.tech/app) for GIS imports, spatial queries, planning analysis and map exports. For agent hosts that can run Node and open a browser on the user's computer (such as WorkBuddy, Claude Code or Codex). Start the official local server, open the /app workspace, and after the user signs in read the official current full guide. Demo/Beta; requires the user to sign in to AgentGIS."
-description_zh: 把数据文件交给 Agent：导入、核对坐标系、TOD / 覆盖缺口 / 选址分析、导出 PDF 成图，全程在你自己的浏览器里完成。
-description_en: Hand your data files to the agent - import, CRS check, TOD / coverage-gap / site-selection analysis and PDF maps, all inside your own browser.
+description_zh: AgentGIS 是一个自然语言驱动的 GIS 应用。把数据文件交给 Agent，用对话描述任务，即可完成数据导入、坐标系核对、TOD 分析、覆盖缺口分析、选址评分、PDF 成图导出等 GIS 工作，全程在你自己的浏览器里本地执行。面向城市规划、城市管理、设施选址、空间资源评估等场景，无需专业 GIS 背景也能快速完成空间分析与制图。
+description_en: AgentGIS is a natural-language-driven GIS application. Hand your data files to the Agent and describe the task in conversation to complete imports, CRS verification, TOD analysis, coverage-gap analysis, site-selection scoring, and PDF map export - all running locally in your browser. Built for urban planning, city management, facility siting, and spatial resource assessment.
 version: 2.0.0
 author: 深圳市七分七秒智能科技有限公司
 ---
