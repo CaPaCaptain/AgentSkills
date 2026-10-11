@@ -1,6 +1,6 @@
-// AgentGIS official Local Helper 0.2.0; application 0.8.0; protocol 4
+// AgentGIS official Local Helper 0.3.0; application 0.8.0; protocol 4
 globalThis.__AGENTGIS_HELPER_RELEASE__ = {
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"application_version": "0.8.0",
 	"bridge_protocol": 4,
 	"node_engine": "^22.12.0 || ^24.0.0 || >=26.0.0",
@@ -59346,30 +59346,50 @@ function normalizeToolError(error) {
 }
 //#endregion
 //#region src/bridge/pairing.ts
+/**
+* `transient` marks failures that say nothing about the binding itself: the trust plane was
+* unreachable, timed out or answered 5xx/429. Definitive rejections (revoked, expired, invalid,
+* mismatched) are never transient.
+*/
+var LocalPairingVerifyError = class extends Error {
+	code;
+	transient;
+	constructor(code, transient) {
+		super(`LOCAL_PAIRING_VERIFY_FAILED:${code}`);
+		this.code = code;
+		this.transient = transient;
+	}
+};
 async function verifyLocalPairingWithEdgeOne(verifyUrl, input, timeoutMs = 5e3) {
 	const url = new URL(verifyUrl);
 	if (url.protocol !== "https:" && !isLoopback$1(url.hostname)) throw new Error("LOCAL_PAIRING_VERIFY_URL_MUST_BE_HTTPS");
 	const controller = new AbortController();
 	const timer = setTimeout(() => controller.abort(), timeoutMs);
 	try {
-		const response = await fetch(url, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				assertion: input.assertion,
-				runtime_id: input.runtimeId,
-				bridge_session_id: input.bridgeSessionId,
-				nonce: input.nonce
-			}),
-			signal: controller.signal
-		});
+		let response;
+		try {
+			response = await fetch(url, {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					assertion: input.assertion,
+					runtime_id: input.runtimeId,
+					bridge_session_id: input.bridgeSessionId,
+					nonce: input.nonce
+				}),
+				signal: controller.signal
+			});
+		} catch {
+			throw new LocalPairingVerifyError("LOCAL_PAIRING_VERIFY_UNREACHABLE", true);
+		}
 		const payload = await response.json().catch(() => ({}));
 		if (!response.ok || payload.ok !== true || !isRecord$2(payload.binding)) {
 			const error = isRecord$2(payload.error) && typeof payload.error.code === "string" ? payload.error.code : `HTTP_${response.status}`;
-			throw new Error(`LOCAL_PAIRING_VERIFY_FAILED:${error}`);
+			const transient = response.status >= 500 || response.status === 429 || !error.startsWith("LOCAL_PAIRING");
+			throw new LocalPairingVerifyError(transient ? "LOCAL_PAIRING_VERIFY_UNREACHABLE" : error, transient);
 		}
 		const binding = payload.binding;
 		const verified = {
@@ -59757,6 +59777,8 @@ const DEFAULT_PORT = 47831;
 const CONTROL_BODY_LIMIT = "128kb";
 const MAX_ADVERTISED_CAPABILITIES = 256;
 const SAFE_CAPABILITY_NAME = /^[A-Za-z0-9._-]{1,128}$/;
+const REVALIDATION_INTERVAL_MS = 5e3;
+const DEFAULT_REVALIDATION_GRACE_MS = 3e4;
 const VALID_PERMISSIONS = /* @__PURE__ */ new Set([
 	"read",
 	"write",
@@ -59784,6 +59806,8 @@ async function startLocalBridge(options) {
 	let activeBinding;
 	let activeAssertion;
 	let revalidationInFlight = false;
+	let lastVerifiedAt = 0;
+	const revalidationGraceMs = options.revalidationGraceMs ?? DEFAULT_REVALIDATION_GRACE_MS;
 	let lastInvalidation;
 	const app = createMcpExpressApp({
 		host: HOST,
@@ -59928,6 +59952,7 @@ async function startLocalBridge(options) {
 			} else bindRuntime(envelope.runtime_id);
 			activeBinding = binding;
 			activeAssertion = envelope.assertion;
+			lastVerifiedAt = Date.now();
 			res.setHeader("Cache-Control", "no-store");
 			res.json({
 				ok: true,
@@ -60344,7 +60369,7 @@ async function startLocalBridge(options) {
 	});
 	await listen(httpServer, options.port ?? DEFAULT_PORT);
 	const port = httpServer.address().port;
-	const revalidationTimer = pairingRequired ? setInterval(() => void revalidateActiveBinding(), 5e3) : void 0;
+	const revalidationTimer = pairingRequired ? setInterval(() => void revalidateActiveBinding(), options.revalidationIntervalMs ?? REVALIDATION_INTERVAL_MS) : void 0;
 	revalidationTimer?.unref();
 	async function revalidateActiveBinding() {
 		if (!activeBinding || !activeAssertion || !pairingVerifyUrl || revalidationInFlight) return;
@@ -60357,9 +60382,14 @@ async function startLocalBridge(options) {
 				bridgeSessionId,
 				nonce: pairingNonce
 			});
-			if (activeBinding?.id === bindingId) activeBinding = verified;
+			if (activeBinding?.id === bindingId) {
+				activeBinding = verified;
+				lastVerifiedAt = Date.now();
+			}
 		} catch (error) {
-			if (activeBinding?.id === bindingId) invalidatePairing("cloud_revalidation", pairingErrorCode(error));
+			if (activeBinding?.id !== bindingId) return;
+			if (error instanceof LocalPairingVerifyError && error.transient && Date.now() - lastVerifiedAt < revalidationGraceMs) return;
+			invalidatePairing("cloud_revalidation", pairingErrorCode(error));
 		} finally {
 			revalidationInFlight = false;
 		}
