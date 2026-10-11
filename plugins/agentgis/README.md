@@ -22,6 +22,18 @@ Codex: `$skill-installer install https://github.com/CaPaCaptain/AgentSkills/tree
 - A free AgentGIS account. Demo/Beta: accepted end-to-end on WorkBuddy for macOS; Claude Code and Codex are being validated.
 - Results are planning-grade, not survey, legal or engineering accuracy.
 
+## Data and network access
+
+The plugin declares no MCP connectors. Its skills contact only these services:
+
+| Service | What is sent or received | When |
+| --- | --- | --- |
+| `https://agent-gis.7m7s.tech` (public) | Downloads the directory `/skills/manifest.json`, the Local Helper manifest and program (SHA-256 verified) | Task start |
+| `https://agent-gis.7m7s.tech` (signed in) | Reads the full guide and manuals; the page pairs with the local server; optional feedback you approve (`feedback.submit`) | After you sign in |
+| `127.0.0.1:47831` (your computer) | GIS commands, the files you name, exported files | During the task |
+
+Your GIS files are not uploaded to the cloud by default: they move only between your computer's local server and your browser. AgentGIS keeps your account, workspace and pairing records and any feedback you send; see the privacy policy. Claude conversation content is not sent to AgentGIS.
+
 Privacy: https://agent-gis.7m7s.tech/privacy/ · Terms: https://agent-gis.7m7s.tech/terms/ · Contact: contact@7m7s.tech
 
 Generated from the AgentGIS repository by `scripts/export-public-skills.mjs`; do not edit here.
