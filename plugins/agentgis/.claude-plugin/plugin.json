@@ -8,6 +8,7 @@
     "email": "contact@7m7s.tech",
     "url": "https://7m7s.tech"
   },
+  "icon": ".claude-plugin/icon.png",
   "homepage": "https://agent-gis.7m7s.tech/",
   "repository": "https://github.com/CaPaCaptain/AgentSkills",
   "keywords": [
