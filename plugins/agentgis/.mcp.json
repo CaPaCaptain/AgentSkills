@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "agentgis": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/helper/agentgis-helper.mjs",
+        "--mcp-stdio"
+      ]
+    }
+  }
+}
