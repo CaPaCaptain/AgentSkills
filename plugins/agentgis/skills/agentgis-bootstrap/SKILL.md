@@ -5,17 +5,18 @@ display_name_en: AgentGIS
 description: 使用 AgentGIS 可见地图工作区（https://agent-gis.7m7s.tech/app）完成数据导入、空间查询、规划分析和制图导出。适用于能在用户电脑上运行 Node 并打开浏览器的 Agent 宿主（如 WorkBuddy、Claude Code、Codex）；启动官方本地服务、打开 /app 工作界面，用户登录后读取官方当前完整指南。Demo/Beta，需要用户登录 AgentGIS。
 description_zh: AgentGIS 是一个自然语言驱动的 GIS 应用。把数据文件交给 Agent，用对话描述任务，即可完成数据导入、坐标系核对、TOD 分析、覆盖缺口分析、选址评分、PDF 成图导出等 GIS 工作，全程在你自己的浏览器里本地执行。面向城市规划、城市管理、设施选址、空间资源评估等场景，无需专业 GIS 背景也能快速完成空间分析与制图。
 description_en: AgentGIS is a natural-language-driven GIS application. Hand your data files to the Agent and describe the task in conversation to complete imports, CRS verification, TOD analysis, coverage-gap analysis, site-selection scoring, and PDF map export - all running locally in your browser. Built for urban planning, city management, facility siting, and spatial resource assessment.
-version: 2.1.0
+version: 2.2.0
 author: 深圳市七分七秒智能科技有限公司
 ---
 
 # AgentGIS 官方引导
-Bootstrap version: 2.1.0 · 简体中文 · 目录 schema 1 · 跟随官方当前版本
+Bootstrap version: 2.2.0 · 简体中文 · 目录 schema 1 · 跟随官方当前版本
 
 **工作界面是 https://agent-gis.7m7s.tech/app 。** 根路径 https://agent-gis.7m7s.tech/ 是官网主页，不是工作界面；打开、聚焦、登录与核对一律用 /app。
 
 本引导只信任官方 origin `https://agent-gis.7m7s.tech`（HTTPS，拒绝跨域跳转、HTML 或 SPA 内容）。公开目录 https://agent-gis.7m7s.tech/skills/manifest.json （schema_version=1）给出 Local Helper 清单（helper，即 `/helpers/manifest.json`）和受保护目录（catalog，即 `/skills/catalog.json`）。完整指南与手册的路径和 SHA-256 只在受保护目录中，**只在用户登录后**可读。每个任务只读一次目录并锁定所选版本，任务中途不换。
 
+**开场：** 用户的第一条消息只是调用本技能或需求不明确（如“用 AgentGIS”“你能做什么”）时，先简短问好，再用宿主的选项/提问工具（没有则用编号列表）让用户选择：① 新建项目 ② 打开已有项目 ③ 了解功能 ④ 其他（直接输入你的问题）。不要先罗列功能。选①②时按下面的登录前步骤启动并打开 /app，登录后按完整指南新建项目或请用户提供项目文件并打开；选③用两三句话介绍能做什么并给出两三句可以直接说的示例；选④直接回答。用户需求已经明确时跳过开场，直接执行；每个对话只开场一次。
 ## 登录前：启动、打开 /app、配对
 **宿主已提供官方 AgentGIS MCP 工具（`agentgis_start` 等，由插件声明的官方 Local Helper 提供）时**：以 `agentgis_start` 代替第 1 步的下载与启动（不再下载或运行其他程序），以 `agentgis_status` 代替 /health 与配对检查，以 `agentgis_call`（tool、input、confirmed_by_user）代替 /agent/rpc，以 `agentgis_describe` 读取参数格式，以 `agentgis_register_file` / `agentgis_save_export` 处理本机文件与导出，任务结束调用 `agentgis_stop`；其余步骤与规则不变。
 
