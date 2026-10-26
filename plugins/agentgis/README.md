@@ -1,4 +1,4 @@
-# AgentGIS skills (plugin 2.1.1, bootstrap 2.1.0)
+# AgentGIS skills (plugin 2.2.0, bootstrap 2.1.0)
 
 Conversational planning GIS: the agent starts the official AgentGIS local server, opens the workspace at https://agent-gis.7m7s.tech/app, and after you sign in performs imports, CRS checks, TOD / coverage-gap / site-selection analysis and PDF/PNG/GeoJSON exports. GIS data stays in your browser by default.
 
@@ -7,7 +7,9 @@ Conversational planning GIS: the agent starts the official AgentGIS local server
 | `skills/agentgis-bootstrap` | 简体中文 |
 | `skills/agentgis-bootstrap-en` | English |
 
-Each folder is complete: `SKILL.md` and `agents/openai.yaml`. The bootstrap pins no release: it reads the official directory `/skills/manifest.json`, verifies the Local Helper against `/helpers/manifest.json`, and after you sign in reads the current full guide from the protected catalog `/skills/catalog.json`. The same folders work in every host and rarely need updating.
+Claude Code also gets the `agentgis-planning-analyst` subagent (`agents/`): an urban planning GIS analyst role that clarifies the goal, checks CRS and parameters with you, and runs everything through the skill above. Ask for it by name or let Claude delegate GIS tasks to it.
+
+Each skill folder is complete: `SKILL.md` and `agents/openai.yaml`. The bootstrap pins no release: it reads the official directory `/skills/manifest.json`, verifies the Local Helper against `/helpers/manifest.json`, and after you sign in reads the current full guide from the protected catalog `/skills/catalog.json`. The same folders work in every host and rarely need updating.
 
 ## Install
 

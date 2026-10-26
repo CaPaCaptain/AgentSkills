@@ -1,7 +1,7 @@
 {
   "name": "agentgis",
   "displayName": "AgentGIS",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Planning GIS by conversation: import data, check CRS, run TOD / coverage-gap / site-selection analysis and export maps in the visible AgentGIS workspace (https://agent-gis.7m7s.tech/app). Runs on the user's own computer; needs Node.js, a visible browser and an AgentGIS sign-in.",
   "author": {
     "name": "深圳市七分七秒智能科技有限公司 (7m7s)",
